@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "./ThemeToggle";
 import { createClient } from "@/utils/supabase/client"; // Client-side Supabase initialization
 import Link from "next/link";
+import { User } from '@/types/types'
 
 
 export default function Header() {
@@ -17,11 +18,10 @@ export default function Header() {
     async function getUserData() {
       // Fetch user from Supabase client-side
       const { data: { user } } = await supabase.auth.getUser();
-
       if (user) {
-        setUser(user);
+        setUser(user as unknown as User); // Type assertion to match local User type
         // Fetch the user's profile to get the avatar URL
-        const { data, error } = await supabase
+        const { data } = await supabase
           .from("profiles")
           .select("avatar_url")
           .eq("id", user.id)

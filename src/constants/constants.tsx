@@ -27,7 +27,7 @@ export const Menus: MenuItem[] = [
     title: "Profiel",
     notification: 0,
     icon: <User className="w-5 h-5" />,
-    path: "/dashboard/profile",
+    path: "/dashboard/account",
   },
   {
     title: "Producten",
