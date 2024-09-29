@@ -4,13 +4,16 @@
     "Bestellingen",
     "Camperplekken",
     "Diëtetiek",
+    "fullname",
     "Producten",
     "Profiel",
     "Reinier",
     "signin",
+    "signout",
     "signup",
     "supabase",
     "toevoegen",
+    "upsert",
     "Varkevisser"
   ]
 }

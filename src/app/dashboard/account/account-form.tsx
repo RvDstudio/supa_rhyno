@@ -37,6 +37,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
+      console.error('Error loading user data:', error);
       alert('Error loading user data!');
     } finally {
       setLoading(false);
@@ -48,9 +49,8 @@ export default function AccountForm({ user }: { user: User | null }) {
       getProfile();
     }
   }, [user, getProfile]);
-
   // Function to handle avatar upload
-  async function uploadAvatar(event: any) {
+  async function uploadAvatar(event: React.ChangeEvent<HTMLInputElement>) {
     try {
       setUploading(true);
       if (!event.target.files || event.target.files.length === 0) {
@@ -73,8 +73,8 @@ export default function AccountForm({ user }: { user: User | null }) {
       // Update avatar_url in state and database
       setAvatarUrl(filePath);
       await updateProfile({ fullname, username, website, avatar_url: filePath });
-    } catch (error) {
-      alert(error.message);
+    } catch (error: unknown) {
+      alert((error as Error).message);
     } finally {
       setUploading(false);
     }
@@ -106,7 +106,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       });
       if (error) throw error;
       alert('Profile updated!');
-    } catch (error) {
+    } catch {
       alert('Error updating the data!');
     } finally {
       setLoading(false);
@@ -148,25 +148,23 @@ export default function AccountForm({ user }: { user: User | null }) {
         />
       </div>
       <div>
-  <label htmlFor="avatar">Avatar</label>
-  <input
-    type="file"
-    id="avatar"
-    accept="image/*"
-    onChange={uploadAvatar}
-    disabled={uploading}
-  />
-  {avatarUrl && (
-    <Image
-      src={supabase.storage
-        .from('avatars')
-        .getPublicUrl(avatarUrl).data.publicUrl} 
-      alt="Avatar"
-      width={100}
-      height={100}
-    />
-  )}
-</div>
+        <label htmlFor="avatar">Avatar</label>
+        <input
+          type="file"
+          id="avatar"
+          accept="image/*"
+          onChange={uploadAvatar}
+          disabled={uploading}
+        />
+        {avatarUrl && (
+          <Image
+            src={supabase.storage.from('avatars').getPublicUrl(avatarUrl).data?.publicUrl || "/images/default.png"}
+            alt="Avatar"
+            width={100}
+            height={100}
+          />
+        )}
+      </div>
 
       <div>
         <button
