@@ -2,6 +2,7 @@ import {
   BaggageClaim,
   BlocksIcon,
   Caravan,
+  Home,
   ShoppingBag,
   User,
 } from "lucide-react";
@@ -16,6 +17,12 @@ interface MenuItem {
 }
 
 export const Menus: MenuItem[] = [
+  {
+    title: "Dashboard",
+    notification: 0,
+    icon: <Home className="w-5 h-5" />,
+    path: "/dashboard",
+  },
   {
     title: "Profiel",
     notification: 0,

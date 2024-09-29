@@ -2,11 +2,10 @@
 import { Button } from "@/components/ui/button";
 import { Provider } from "@supabase/supabase-js";
 import { Github } from "lucide-react";
-import { oAuthSignIn } from "@/app/auth/login/actions";
-import { FaGoogle } from "react-icons/fa";
+import { oAuthSignIn } from "./actions";
 
 type OAuthProvider = {
-  name: Provider;
+  name: Provider; // Expecting a string matching a valid provider
   displayName: string;
   icon?: JSX.Element;
 };
@@ -14,14 +13,14 @@ type OAuthProvider = {
 export function OAuthButtons() {
   const oAuthProviders: OAuthProvider[] = [
     {
-      name: "github",
-      displayName: "GitHub",
+      name: "github" as Provider, // Cast the string to the correct Provider type
+      displayName: "Github",
       icon: <Github className="size-5" />,
     },
     {
-      name: "google",
+      name: "google" as Provider, // Cast the string to the correct Provider type
       displayName: "Google",
-      icon: <FaGoogle className="size-5" />,
+      icon: <Github className="size-5" />,
     },
   ];
 
@@ -29,7 +28,7 @@ export function OAuthButtons() {
     <>
       {oAuthProviders.map((provider) => (
         <Button
-          key=""
+          key={provider.name} // Always add a key when rendering list items
           className="w-full flex items-center justify-center gap-2"
           variant="outline"
           onClick={async () => {

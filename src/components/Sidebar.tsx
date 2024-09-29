@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeftSquareIcon, Tractor, Milk } from "lucide-react";
+import { ArrowLeftSquareIcon, Milk, Atom } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Menus } from "@/constants/constants";
@@ -21,7 +21,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className={`${open ? "w-72  hidden md:block" : "w-18 hidden md:block"
+      className={`${open ? "w-64 lg:w-72  hidden md:block" : "w-18 hidden md:block"
         } bg-[#374C69] dark:bg-[#171717] border-r border-light-white dark:border-[#2e2e2e] p-4 pt-4 h-screen sticky top-0 duration-300 z-40`}
     >
       <ArrowLeftSquareIcon
@@ -30,31 +30,31 @@ const Sidebar = () => {
           }`}
       />
       <div className="flex gap-x-2 items-center border-b border-[#425b7b] pb-[18px]">
-        <Tractor
+        <Atom
           strokeWidth={1}
           className={`text-white pl-1 dark:text-white cursor-pointer duration-500 h-8 w-8`}
         />
         <h1
-          className={`text-white dark:text-white origin-left font-medium text-[22px] duration-200 ${!open && "scale-0 hidden"
+          className={`text-white dark:text-white origin-left font-bold text-[22px] duration-200 ${!open && "scale-0 hidden"
             }`}
         >
-          Erf1<span className="text-[#6699CC]"> Bestellingen</span>
+          Rhyno <span className="text-[#6699CC]">| Starter</span>
         </h1>
       </div>
 
-      <ul className="pt-4 space-y-3">
+      <ul className="pt-4 space-y-4">
         {filteredMenus.map((menu, index) => (
           <div key={index}>
             {menu.gap && (
-              <div className="my-4 border-t border-dashed border-[#6699CC] dark:border-gray-600" />
+              <div className="my-4 border-t border-dashed border-[#26a865] dark:border-gray-600" />
             )}
             <li className="">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Link
-                      className={`w-full flex items-center space-x-2 hover:bg-[#6699CC] dark:hover:bg-[#292929] active:bg-gray-300 py-3 px-2 rounded-lg text-white ${isActive(menu.path)
-                        ? "bg-[#30425b] border border-[#425b7b] text-white dark:bg-[#292929]"
+                      className={`w-full flex items-center space-x-2 hover:bg-[#6699CC] dark:hover:bg-[#292929] active:bg-gray-300 py-2 px-2 rounded-lg text-white ${isActive(menu.path)
+                        ? "bg-[#30425b] border border-[#2f2f2f] text-white dark:bg-[#292929]"
                         : ""
                         }`}
                       href={menu.path}
